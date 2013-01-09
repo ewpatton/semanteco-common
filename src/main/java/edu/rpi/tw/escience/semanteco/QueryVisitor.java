@@ -1,10 +1,10 @@
-package edu.rpi.tw.escience.waterquality;
+package edu.rpi.tw.escience.semanteco;
 
-import edu.rpi.tw.escience.waterquality.query.Query;
+import edu.rpi.tw.escience.semanteco.query.Query;
 
 /**
  * An object implementing the QueryVisitor will be called when
- * a SemantAqua client requests data, allowing the visitor to
+ * a SemantEco client requests data, allowing the visitor to
  * specialize the Query based on parameters passed through
  * the RESTful interface. 
  * 

@@ -1,15 +1,15 @@
-package edu.rpi.tw.escience.waterquality;
+package edu.rpi.tw.escience.semanteco;
 
 import java.util.List;
 
 /**
- * The SemantAquaUI object provides a mechanism for
+ * The SemantEcoUI object provides a mechanism for
  * modules to manipulate the UI when it is rendered by
  * the server and sent to the client.
  * @author ewpatton
  *
  */
-public interface SemantAquaUI {
+public interface SemantEcoUI {
 	/**
 	 * Adds a resource representing a JavaScript file
 	 * @param script

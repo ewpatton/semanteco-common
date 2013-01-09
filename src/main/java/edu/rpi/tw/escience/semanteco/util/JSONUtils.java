@@ -1,4 +1,4 @@
-package edu.rpi.tw.escience.waterquality.util;
+package edu.rpi.tw.escience.semanteco.util;
 
 import java.util.ArrayList;
 import java.util.List;

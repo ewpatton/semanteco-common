@@ -1,7 +1,7 @@
-package edu.rpi.tw.escience.waterquality;
+package edu.rpi.tw.escience.semanteco;
 
-import edu.rpi.tw.escience.waterquality.query.Query;
-import edu.rpi.tw.escience.waterquality.query.Query.Type;
+import edu.rpi.tw.escience.semanteco.query.Query;
+import edu.rpi.tw.escience.semanteco.query.Query.Type;
 
 /**
  * A QueryFactory object generates new Query

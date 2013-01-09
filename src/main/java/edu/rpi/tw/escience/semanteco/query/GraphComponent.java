@@ -1,4 +1,4 @@
-package edu.rpi.tw.escience.waterquality.query;
+package edu.rpi.tw.escience.semanteco.query;
 
 /**
  * Top interface for all graph component objects

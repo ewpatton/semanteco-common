@@ -1,7 +1,7 @@
-package edu.rpi.tw.escience.waterquality;
+package edu.rpi.tw.escience.semanteco;
 
 /**
- * The Module interface defines the API between the core SemantAqua system
+ * The Module interface defines the API between the core SemantEco system
  * and modules that extend the service by adding new facets, data, or ontologies.
  * 
  * @author ewpatton

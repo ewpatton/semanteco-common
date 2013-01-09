@@ -1,8 +1,8 @@
-package edu.rpi.tw.escience.waterquality;
+package edu.rpi.tw.escience.semanteco;
 
 /**
  * An object implementing UIVisitor can be used to extend the
- * SemantAqua user interface via JavaServer Faces or by adding
+ * SemantEco user interface via JavaServer Faces or by adding
  * additional CSS and JavaScript resources to the page.
  * 
  * @author ewpatton
@@ -19,9 +19,9 @@ public interface UIVisitor {
 	
 	/**
 	 * Allows the UIVisitor to manipulate
-	 * the SemantAqua UI at runtime
+	 * the SemantEco UI at runtime
 	 * @param ui
 	 * @param params
 	 */
-	void visit(SemantAquaUI ui, Request request);
+	void visit(SemantEcoUI ui, Request request);
 }

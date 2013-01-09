@@ -1,4 +1,4 @@
-package edu.rpi.tw.escience.waterquality;
+package edu.rpi.tw.escience.semanteco;
 
 import org.apache.log4j.Logger;
 
@@ -7,7 +7,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 
 /**
  * The Request interface provides a contract between a client's RESTful call
- * to SemantAqua and how the system interacts with the parameters of the
+ * to SemantEco and how the system interacts with the parameters of the
  * request.
  * @author ewpatton
  *

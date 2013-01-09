@@ -1,4 +1,4 @@
-package edu.rpi.tw.escience.waterquality;
+package edu.rpi.tw.escience.semanteco;
 
 import java.net.URI;
 import java.util.List;
@@ -8,9 +8,9 @@ import org.apache.log4j.Logger;
 
 /**
  * Each module receives a configuration object that allows it to
- * interact with the core SemantAqua components as well as other
+ * interact with the core SemantEco components as well as other
  * modules. This class serves as the base class for the actual module
- * configurations implemented in the SemantAqua core.
+ * configurations implemented in the SemantEco core.
  * 
  * @author ewpatton
  *
@@ -72,6 +72,10 @@ public abstract class ModuleConfiguration extends Properties {
 	 */
 	public abstract Domain getDomain(URI uri, boolean create);
 
+	/**
+	 * Returns a list of all domains known by SemantEco.
+	 * @return
+	 */
 	public abstract List<Domain> listDomains();
 
 }

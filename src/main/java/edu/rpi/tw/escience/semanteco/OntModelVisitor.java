@@ -1,9 +1,9 @@
-package edu.rpi.tw.escience.waterquality;
+package edu.rpi.tw.escience.semanteco;
 
 import com.hp.hpl.jena.ontology.OntModel;
 
 /**
- * The SemantAqua core will pass an OntModel object to all
+ * The SemantEco core will pass an OntModel object to all
  * OntModelVisitor objects in order to construct a final ontology
  * used for reasoning over the data model.
  * 

@@ -1,4 +1,4 @@
-package edu.rpi.tw.escience.waterquality.query;
+package edu.rpi.tw.escience.semanteco.query;
 
 /**
  * The NamedGraphComponent is used to represent a GRAPH &lt;...&gt; { }

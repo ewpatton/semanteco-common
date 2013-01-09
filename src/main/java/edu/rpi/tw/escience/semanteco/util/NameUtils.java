@@ -1,4 +1,4 @@
-package edu.rpi.tw.escience.waterquality.util;
+package edu.rpi.tw.escience.semanteco.util;
 
 /**
  * NameUtils can be used by modules providing JavaScript to take a string

@@ -1,9 +1,9 @@
-package edu.rpi.tw.escience.waterquality;
+package edu.rpi.tw.escience.semanteco;
 
 import com.hp.hpl.jena.rdf.model.Model;
 
 /**
- * When the SemantAqua core is preparing a model for querying,
+ * When the SemantEco core is preparing a model for querying,
  * instances of DataModelVisitor will be called to modify
  * the data model by reading in new datasets.
  * 

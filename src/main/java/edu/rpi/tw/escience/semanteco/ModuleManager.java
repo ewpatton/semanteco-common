@@ -1,4 +1,4 @@
-package edu.rpi.tw.escience.waterquality;
+package edu.rpi.tw.escience.semanteco;
 
 import java.net.URI;
 import java.util.List;
@@ -6,11 +6,11 @@ import java.util.List;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.rdf.model.Model;
 
-import edu.rpi.tw.escience.waterquality.query.Query;
+import edu.rpi.tw.escience.semanteco.query.Query;
 
 /**
  * The ModuleManager provides a mechanism for collecting, configuring, and
- * processing modules in the SemantAqua framework.
+ * processing modules in the SemantEco framework.
  * 
  * @author ewpatton
  *
@@ -27,11 +27,11 @@ public interface ModuleManager {
 	
 	/**
 	 * Requests that the ModuleManager help construct the UI by having
-	 * each of its modules visit the provided SemantAquaUI object.
+	 * each of its modules visit the provided SemantEcoUI object.
 	 * @param ui
 	 * @param params
 	 */
-	void buildUserInterface(SemantAquaUI ui, Request request);
+	void buildUserInterface(SemantEcoUI ui, Request request);
 	
 	/**
 	 * Requests that the ModuleManager help construct the ontology model
@@ -86,16 +86,30 @@ public interface ModuleManager {
 	
 	/**
 	 * Returns the last modified time in milliseconds of the manager. This is
-	 * primarily useful for when modules are redeployed in SemantAqua so that
+	 * primarily useful for when modules are redeployed in SemantEco so that
 	 * other subsystems that rely on being fresh relative to the modules can
-	 * perform additional updates (e.g. SemantAquaUI)
+	 * perform additional updates (e.g. SemantEcoUI)
 	 * @return
 	 */
 	long getLastModified();
 	
+	/**
+	 * Gets a Domain object named by the URI. One will be created if none exists.
+	 * @param uri A URI naming a Domain, by convention it SHOULD be an OWL file. 
+	 * @return Domain object named by the URI.
+	 */
 	Domain getDomain(URI uri);
 
+	/**
+	 * Registers a domain with the manager. Modules should not need to call
+	 * this but instead rely on {@link #getDomain(URI)}
+	 * @param domain
+	 */
 	void registerDomain(Domain domain);
 
+	/**
+	 * Lists all of the domains known by the manager.
+	 * @return
+	 */
 	List<Domain> listDomains();
 }

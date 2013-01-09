@@ -1,8 +1,8 @@
-package edu.rpi.tw.escience.waterquality;
+package edu.rpi.tw.escience.semanteco;
 
 import com.hp.hpl.jena.rdf.model.Model;
 
-import edu.rpi.tw.escience.waterquality.query.Query;
+import edu.rpi.tw.escience.semanteco.query.Query;
 
 /**
  * The QueryExecutor is responsible for executing SPARQL queries
@@ -50,7 +50,7 @@ public interface QueryExecutor {
 	QueryExecutor execute(String endpoint, Query query, Model model);
 
 	/**
-	 * Gets the default SPARQL endpoint URI used by this SemantAqua instance.
+	 * Gets the default SPARQL endpoint URI used by this SemantEco instance.
 	 * @return
 	 */
 	String getDefaultSparqlEndpoint();

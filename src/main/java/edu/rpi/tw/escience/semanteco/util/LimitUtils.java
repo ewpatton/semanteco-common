@@ -1,8 +1,8 @@
-package edu.rpi.tw.escience.waterquality.util;
+package edu.rpi.tw.escience.semanteco.util;
 
 import org.json.JSONObject;
 
-import edu.rpi.tw.escience.waterquality.Request;
+import edu.rpi.tw.escience.semanteco.Request;
 
 /**
  * LimitUtils can be used by various modules to process the structure
