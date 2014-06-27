@@ -4,13 +4,19 @@ import java.net.URI;
 import java.util.List;
 
 public interface User{
+	String getUserName();
+	
 	// user's person URI?
 	URI getUri();
 	
-	// I guess we have to implement a Permission, too, somehow?
-	void addPermission(Permission permission, String label);
+	void addPermission(Permission permission);
 	void revokePermission(Permission permission);
-	Permission getPermission();
+	
+	// returns TRUE if the given Permission is set (even if it is set to NONE)
+	// and FALSE if there is no Permission with that name exists
+	boolean hasPermission(String pName);
+	
+	Permission getPermission(String pName);
 	<List>Permission getPermissions();
 	
 	/* I'm thinking handling all these as strings might be easiest, and
