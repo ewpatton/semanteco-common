@@ -5,9 +5,11 @@ import java.util.List;
 
 public interface Permission{
 	// How do these sound?
-	private enum Level{ NONE, VIEW, WRITE, ADMIN }
+	public enum Level{ 
+		NONE, READ_ONLY, WRITE_ONLY, READ_WRITE, ADMIN;
+	}
 
 	String getPermissionName();
-	enum getPermissionLevel();
+	Level getPermissionLevel(String pName);
 	void setPermissionLevel(String pName);
 }// Permission
