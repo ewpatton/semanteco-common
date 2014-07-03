@@ -17,7 +17,7 @@ public interface User{
 	boolean hasPermission(String pName);
 	
 	Permission getPermission(String pName);
-	<List>Permission getPermissions();
+	List<Permission> getPermissions();
 	
 	/* I'm thinking handling all these as strings might be easiest, and
 	/  then they can be parsed as necessary on the client side from JSON?
