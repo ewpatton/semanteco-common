@@ -4,36 +4,35 @@ import java.net.URI;
 import java.util.List;
 
 public class AtomicPermission implements Permission{
-	public enum Level{ 
-		NONE, READ_ONLY, WRITE_ONLY, READ_WRITE, ADMIN;
-	}
 
 	private String pName;
 	private Level pLevel;
 	private URI pURI;
 	
+	// null constructor
 	public AtomicPermission(){
 		this.pName = "null";
-		this.pLevel = NONE;
+		this.pLevel = Level.valueOf("NONE");
 		this.pURI = null;
 	}
 	// assuming the URI is of the format
 	// http://<authority>/<Level>
 	public AtomicPermission(URI theURI){
 		this.pName = theURI.getAuthority();
-		this.pLevel = (theURI.getPath()).toUpperCase();
+		this.pLevel = Level.valueOf((theURI.getPath()).toUpperCase());
 		this.pURI = theURI;
 	}
 	
-	String getPermissionName(){
+	public String getPermissionName(){
 		return this.pName;
 	}
 	
-	Level getPermissionLevel(){
+	public Level getPermissionLevel(){
 		return this.pLevel;
 	}
 	
-	void setPermissionLevel(Level newLevel){
+	@Override
+	public void setPermissionLevel(Level newLevel){
 		this.pLevel = newLevel;
 	}
 	
@@ -41,10 +40,9 @@ public class AtomicPermission implements Permission{
 	* AtomicPermission class in semanteco-core that takes a URI as a parameter and 
 	* for its hasPermission(User) method, check that the user contains the permission object.
 	*/
-	hasPermission(User user){
-		List<AtomicPermission> perms = user.getPermissions();
-		//private ListIterator<AtomicPermission> iter = perms.listIterator();
-		int index = perms.indexOf(this);
+	public boolean hasPermission(User user){
+		List<Permission> perms = user.getPermissions();
+		int index = perms.indexOf((Permission)(this));
 		if( index < 0 ) return false;
 		else return true;
 	}// /hasPermission
@@ -57,7 +55,7 @@ public class AtomicPermission implements Permission{
 	 * @return true if the user passes the test this permission requires,
 	 * otherwise false.
 	 */
-	boolean evaluate(User user){
+	public boolean evaluate(User user){
 		if(this.hasPermission(user)) return true;
 		else return false;
 	}// /evaluate

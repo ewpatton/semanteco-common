@@ -7,11 +7,11 @@ public interface Permission{
 	// How do these sound?
 	public enum Level{ 
 		NONE, READ_ONLY, WRITE_ONLY, READ_WRITE, ADMIN;
-	}
+	};
 
 	String getPermissionName();
 	Level getPermissionLevel();
-	void setPermissionLevel(Level pName);
+	void setPermissionLevel(Level pLevel);
 
 	/**
 	 * Allows permissions to implement rules as a function of users so that
