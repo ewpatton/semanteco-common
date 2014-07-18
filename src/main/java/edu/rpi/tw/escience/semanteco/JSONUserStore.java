@@ -1,21 +1,34 @@
 package edu.rpi.tw.escience.semanteco;
 
 import java.io.File;
-import java.util.HashMap;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URI;
 import java.util.List;
+import java.util.HashMap;
 import org.json.JSONObject;
-import org.json.JSONParser;
+import org.json.JSONException;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class JSONUserStore implements UserStore{
 	// Returns TRUE on successful write or FALSE on error
-	boolean writeUser(User user){
-		String identifier = user.getUri();
+	public boolean writeUser(User user){
+		URI identifier = user.getUri();
 		JSONObject theJSON = new JSONObject();
-		theJSON.put("username", user.getUsername());
-		theJSON.put("uri", identifier);
-		theJSON.put("permissions", user.getPermissions());
-		theJSON.put("prefs", user.getPreferences());
-		String fname = identifier + ".txt";
+		try{
+			theJSON.put("username", user.getUsername());
+			theJSON.put("uri", identifier);
+			theJSON.put("permissions", user.getPermissions());
+			theJSON.put("prefs", user.getPreferences());
+		} catch (JSONException e ){
+			e.printStackTrace();
+			return false;
+		}
+		String fname = identifier.getAuthority() + ".txt";
 		try {
 			File f = new File(fname);
 			f.createNewFile();
@@ -31,21 +44,23 @@ public class JSONUserStore implements UserStore{
 	
 	// identifier should be some way of uniquely identifying a User
 	// Ideally a URI?
-	User readUser(String identifier){
+	public JSONUser readUser(String identifier){
 		String fname = identifier + ".txt";
 		JSONParser parser = new JSONParser();
-		User user = new User();
+		JSONUser user = new JSONUser();
 		try{
-			JSONObject obj = (JSONObject) parser.parse(newFileReader(identifier));
-			user.setName(obj.getString("name"));
+			JSONObject obj = (JSONObject) parser.parse(new FileReader(identifier));
+			user.setUsername(obj.getString("name"));
 			user.setUri((URI)obj.get("uri"));
-			user.setPermissions((List<Permissions>)obj.get("permissions"));
+			user.setPermissions((List<Permission>)obj.get("permissions"));
 			user.setPreferences((HashMap<String,String>)obj.get("preferences"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 		return user;

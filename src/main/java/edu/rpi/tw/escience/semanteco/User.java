@@ -39,5 +39,5 @@ public interface User{
 	// get all preferences
 	Map<String,String> getPreferences();
 	// set all preferences (for use when reading a User from file/database)
-	void setPreferences(Map<String,String>);
+	void setPreferences(Map<String,String> prefs);
 }// /User  

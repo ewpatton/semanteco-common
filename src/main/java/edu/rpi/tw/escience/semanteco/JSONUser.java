@@ -1,47 +1,59 @@
 package edu.rpi.tw.escience.semanteco;
 
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Collection;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.ListIterator;
+import java.util.Map;
 import java.util.HashMap;
 import org.json.JSONObject;
+import org.json.JSONException;
 
-public class TestUser implements User{
+public class JSONUser implements User{
 	private String username;
-	private String personURI;
-	private List<Permission> permissions;
+	private URI personURI;
+	private ArrayList<Permission> permissions;
 	private HashMap<String, String> prefs;
 	
 	// default constructor
-	public TestUser(){
+	public JSONUser(){
 		this.username = "default";
-		this.personURI = "";
-		this.permissions = new List<Permission>();
+		this.personURI = null;
+		this.permissions = new ArrayList<Permission>();
 		this.prefs = new HashMap<String, String>();
 	}
 
-	public TestUser(String myName, String myUri){
+	public JSONUser(String myName, URI myUri){
 		this.username = myName;
 		this.personURI = myUri;
-		this.permissions = new List<Permission>();
+		this.permissions = new ArrayList<Permission>();
 		this.prefs = new HashMap<String,String>();
 	}
 	
 	// This will be used for reading Users from JSON.
-	public TestUser(JSONObject jsonUser){
-		this.username = jsonUser.getString("username");
-		this.personURI = (URI)jsonUser.get("uri");
-		this.permissions = (List<Permission>)(jsonUser.get("permissions"));
-		this.prefs = (HashMap<String,String>)(jsonUser.get("prefs"));
+	public JSONUser(JSONObject jsonUser){
+		try{
+			this.username = jsonUser.getString("username");
+			this.personURI = new URI(jsonUser.getString("uri"));
+			this.permissions = (ArrayList<Permission>)(jsonUser.get("permissions"));
+			this.prefs = (HashMap<String,String>)(jsonUser.get("prefs"));
+		} catch (JSONException e ){
+			e.printStackTrace();
+		} catch (URISyntaxException e){
+			e.printStackTrace();
+		}
 	}
 	
-	public JSONObject toJSON(){
+	/*public JSONObject toJSON(){
 		JSONObject theJSON = new JSONObject();
 		theJSON.put("username", this.username);
 		theJSON.put("uri", this.personURI);
 		theJSON.put("permissions", this.permissions);
 		theJSON.put("prefs", this.prefs);
 		return theJSON;
-	}
+	}*/
 	
 	public String getUsername(){
 		return this.username;
@@ -50,7 +62,7 @@ public class TestUser implements User{
 		this.username = theName;
 	}
 	
-	public String getUri(){
+	public URI getUri(){
 		return this.personURI;
 	}
 	public void setUri(URI theUri){
@@ -71,7 +83,7 @@ public class TestUser implements User{
 	// returns TRUE if the given Permission is set (even if it is set to NONE)
 	// and FALSE if there is no Permission with that name exists
 	public boolean hasPermission(String pName){
-		ListIterator<Permission> iter = new ListIterator();
+		ListIterator<Permission> iter = permissions.listIterator();
 		Permission temp;
 		while(iter.hasNext()){
 			temp = iter.next();
@@ -81,8 +93,8 @@ public class TestUser implements User{
 		return false;
 	}// /hasPermission
 	
-	public TestPermission getPermission(String pName){
-		ListIterator<Permission> iter = new ListIterator();
+	public Permission getPermission(String pName){
+		ListIterator<Permission> iter = permissions.listIterator();
 		Permission temp;
 		while(iter.hasNext()){
 			temp = iter.next();
@@ -96,7 +108,7 @@ public class TestUser implements User{
 		return this.permissions;
 	}
 	public void setPermissions(List<Permission> thePerms){
-		this.permissions = thePerms;
+		this.permissions = (ArrayList)thePerms;
 	}
 	
 	// User Preference Methods:
@@ -112,16 +124,16 @@ public class TestUser implements User{
 	public String getPreference(String key){
 		return this.prefs.get(key);
 	}
-	public HashMap<String,String> getPreferences(){
+	public Map<String,String> getPreferences(){
 		return this.prefs;
 	}
-	public void setPreferences(HashMap<String,String> thePrefs){
-		this.prefs = thePrefs;
+	public void setPreferences(Map<String,String> thePrefs){
+		this.prefs = (HashMap)thePrefs;
 	}
 	
-	public String toString(){
-		JSONObject theJSON = this.toJSON;
+	/*public String toString(){
+		JSONObject theJSON = this.toJSON();
 		return theJSON.toString(4);
-	}
+	}*/
 	
 }// /TestUser
