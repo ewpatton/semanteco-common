@@ -16,6 +16,7 @@ import org.json.simple.parser.ParseException;
 
 public class JSONUserStore implements UserStore{
 	// Returns TRUE on successful write or FALSE on error
+	@Override
 	public boolean writeUser(User user){
 		URI identifier = user.getUri();
 		JSONObject theJSON = new JSONObject();
@@ -43,7 +44,8 @@ public class JSONUserStore implements UserStore{
 	}// /writeUser
 	
 	// identifier should be some way of uniquely identifying a User
-	// Ideally a URI?
+	// Ideally a URI, or a compression thereof that can be used as a file name
+	@Override
 	public JSONUser readUser(String identifier){
 		String fname = identifier + ".txt";
 		JSONParser parser = new JSONParser();

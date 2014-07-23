@@ -68,6 +68,13 @@ public class JSONUser implements User{
 	public void setUri(URI theUri){
 		this.personURI = theUri;
 	}
+	public void setUri(String theUri){
+		try{
+			this.personURI = new URI(theUri);
+		} catch (URISyntaxException e){
+			e.printStackTrace();
+		}
+	}
 	
 	public void addPermission(Permission newPermission){
 		permissions.add(newPermission);
@@ -136,4 +143,4 @@ public class JSONUser implements User{
 		return theJSON.toString(4);
 	}*/
 	
-}// /TestUser
+}// /JSONUser
