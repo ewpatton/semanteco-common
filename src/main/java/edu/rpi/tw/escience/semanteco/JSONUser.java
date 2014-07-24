@@ -15,21 +15,21 @@ public class JSONUser implements User{
 	private String username;
 	private URI personURI;
 	private ArrayList<Permission> permissions;
-	private HashMap<String, String> prefs;
+	private HashMap<String, Object> prefs;
 	
 	// default constructor
 	public JSONUser(){
 		this.username = "default";
 		this.personURI = null;
 		this.permissions = new ArrayList<Permission>();
-		this.prefs = new HashMap<String, String>();
+		this.prefs = new HashMap<String,Object>();
 	}
 
 	public JSONUser(String myName, URI myUri){
 		this.username = myName;
 		this.personURI = myUri;
 		this.permissions = new ArrayList<Permission>();
-		this.prefs = new HashMap<String,String>();
+		this.prefs = new HashMap<String,Object>();
 	}
 	
 	// This will be used for reading Users from JSON.
@@ -38,7 +38,7 @@ public class JSONUser implements User{
 			this.username = jsonUser.getString("username");
 			this.personURI = new URI(jsonUser.getString("uri"));
 			this.permissions = (ArrayList<Permission>)(jsonUser.get("permissions"));
-			this.prefs = (HashMap<String,String>)(jsonUser.get("prefs"));
+			this.prefs = (HashMap<String,Object>)(jsonUser.get("prefs"));
 		} catch (JSONException e ){
 			e.printStackTrace();
 		} catch (URISyntaxException e){
@@ -86,20 +86,25 @@ public class JSONUser implements User{
 			permissions.remove(index);
 		}
 	}// /revokePermission
-	
-	// returns TRUE if the given Permission is set (even if it is set to NONE)
-	// and FALSE if there is no Permission with that name exists
+	// Returns false if no Permission with name pName exists 
+	// OR if the Permission exists but is set to NONE
+	// Otherwise, returns true
 	public boolean hasPermission(String pName){
 		ListIterator<Permission> iter = permissions.listIterator();
 		Permission temp;
 		while(iter.hasNext()){
 			temp = iter.next();
-			if(temp.getPermissionName().equals(pName))
-				return true;
+			if(temp.getPermissionName().equals(pName)){
+				if(temp.getPermissionLevel() == Permission.Level.NONE)
+					return false;
+				else
+					return true;
+			}
 		}
 		return false;
 	}// /hasPermission
-	
+	// Returns the Permission with the name provided as an argument
+	// If no such Permission exists, returns null
 	public Permission getPermission(String pName){
 		ListIterator<Permission> iter = permissions.listIterator();
 		Permission temp;
@@ -110,17 +115,30 @@ public class JSONUser implements User{
 		}
 		return null;
 	}
-	
+	// Returns a List of all Permissions
 	public List<Permission> getPermissions(){
 		return this.permissions;
 	}
+	// Sets ALL Permissions at once
+	// (eg, when a JSONUser is loaded from storage)
 	public void setPermissions(List<Permission> thePerms){
 		this.permissions = (ArrayList)thePerms;
 	}
 	
+	
+	
 	// User Preference Methods:
+	// eg, for storing a single-value global preference
 	public void setPreference(String key, String value){
 		this.prefs.put(key, value);
+	}
+	// eg, for storing lists of loaded ontologies
+	public void setPreference(String key, List<String> valueList){
+		this.prefs.put(key, valueList);
+	}
+	// eg, for storing frequency-of-use stats for ontologies
+	public void setPreference(String key, Map<String,Object> valueMap){
+		this.prefs.put(key, valueMap);
 	}
 	// If key had an associated value, remove() returns the value,
 	// 	 else returns NULL
@@ -128,13 +146,17 @@ public class JSONUser implements User{
 		this.prefs.remove(key);
 	}
 	// will return NULL if there is no value associated with the key
-	public String getPreference(String key){
+	// This will either be a String, a List<String>, or a Map<String,Object>
+	public Object getPreference(String key){
 		return this.prefs.get(key);
 	}
-	public Map<String,String> getPreferences(){
+	// Returns ALL preferences
+	public Map<String,Object> getPreferences(){
 		return this.prefs;
 	}
-	public void setPreferences(Map<String,String> thePrefs){
+	// Sets ALL preferences at once
+	// (eg, when loading a JSONUser that has been stored)
+	public void setPreferences(Map<String,Object> thePrefs){
 		this.prefs = (HashMap)thePrefs;
 	}
 	

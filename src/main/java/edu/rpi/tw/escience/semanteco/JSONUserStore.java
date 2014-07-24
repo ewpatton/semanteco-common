@@ -47,7 +47,7 @@ public class JSONUserStore implements UserStore{
 	// Ideally a URI, or a compression thereof that can be used as a file name
 	@Override
 	public JSONUser readUser(String identifier){
-		String fname = identifier + ".txt";
+		String fname = identifier + ".json";
 		JSONParser parser = new JSONParser();
 		JSONUser user = new JSONUser();
 		try{
@@ -55,7 +55,7 @@ public class JSONUserStore implements UserStore{
 			user.setUsername(obj.getString("name"));
 			user.setUri((URI)obj.get("uri"));
 			user.setPermissions((List<Permission>)obj.get("permissions"));
-			user.setPreferences((HashMap<String,String>)obj.get("preferences"));
+			user.setPreferences((HashMap<String,Object>)obj.get("preferences"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

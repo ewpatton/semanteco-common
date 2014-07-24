@@ -35,9 +35,9 @@ public interface User{
 	// remove a preference by key
 	void removePreference(String key);
 	// get the value of a preference by its key
-	String getPreference(String key);
+	Object getPreference(String key);
 	// get all preferences
-	Map<String,String> getPreferences();
+	Map<String,Object> getPreferences();
 	// set all preferences (for use when reading a User from file/database)
-	void setPreferences(Map<String,String> prefs);
+	void setPreferences(Map<String,Object> prefs);
 }// /User  
