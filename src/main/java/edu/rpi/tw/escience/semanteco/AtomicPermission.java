@@ -2,6 +2,8 @@ package edu.rpi.tw.escience.semanteco;
 
 import java.net.URI;
 import java.util.List;
+import org.json.JSONObject;
+import org.json.JSONException;
 
 public class AtomicPermission implements Permission{
 
@@ -59,4 +61,17 @@ public class AtomicPermission implements Permission{
 		if(this.hasPermission(user)) return true;
 		else return false;
 	}// /evaluate
+	
+	public JSONObject toJSONObject(){
+		JSONObject theJSON = new JSONObject();
+		try{
+			theJSON.put("pName", this.pName);
+			theJSON.put("pLevel", this.pLevel.toString());
+			theJSON.put("pURI", this.pURI.toString());
+		} catch (JSONException e ){
+			e.printStackTrace();
+			return null;
+		}
+		return theJSON;
+	}
 }// /AtomicPermission

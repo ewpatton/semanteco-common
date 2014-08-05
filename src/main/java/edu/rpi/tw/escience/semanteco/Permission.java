@@ -2,6 +2,7 @@ package edu.rpi.tw.escience.semanteco;
 
 import java.net.URI;
 import java.util.List;
+import org.json.JSONObject;
 
 public interface Permission{
 	// How do these sound?
@@ -22,4 +23,6 @@ public interface Permission{
 	 * otherwise false.
 	 */
 	boolean evaluate(User user);
+	// required for ServletUtils.java's String serializeUser(User user)
+	JSONObject toJSONObject();
 }// Permission

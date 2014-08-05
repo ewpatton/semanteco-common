@@ -25,6 +25,8 @@ public class JSONUser implements User{
 		this.prefs = new HashMap<String,Object>();
 	}
 
+	// Creates a JSONUser with the specified name and URI,
+	//  and blank sets of Permissions and preferences
 	public JSONUser(String myName, URI myUri){
 		this.username = myName;
 		this.personURI = myUri;
@@ -32,7 +34,7 @@ public class JSONUser implements User{
 		this.prefs = new HashMap<String,Object>();
 	}
 	
-	// This will be used for reading Users from JSON.
+	// This will be used for reading stored JSONUsers from JSON
 	public JSONUser(JSONObject jsonUser){
 		try{
 			this.username = jsonUser.getString("username");
@@ -55,13 +57,13 @@ public class JSONUser implements User{
 		return theJSON;
 	}*/
 	
+	// Getters and Setters for JSONUser fields
 	public String getUsername(){
 		return this.username;
 	}
 	public void setUsername(String theName){
 		this.username = theName;
 	}
-	
 	public URI getUri(){
 		return this.personURI;
 	}
@@ -147,12 +149,15 @@ public class JSONUser implements User{
 	}
 	// will return NULL if there is no value associated with the key
 	// This will either be a String, a List<String>, or a Map<String,Object>
-	public Object getPreference(String key){
-		return this.prefs.get(key);
+	public JSONObject getPreference(String key){
+		return new JSONObject(this.prefs.get(key));
 	}
 	// Returns ALL preferences
 	public Map<String,Object> getPreferences(){
 		return this.prefs;
+	}
+	public JSONObject getJSONPrefs(){
+		return new JSONObject(this.prefs);
 	}
 	// Sets ALL preferences at once
 	// (eg, when loading a JSONUser that has been stored)

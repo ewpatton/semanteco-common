@@ -15,6 +15,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class JSONUserStore implements UserStore{
+	// Takes a User and parses it into a JSONObject, then records
+	//    that JSON object for storage
 	// Returns TRUE on successful write or FALSE on error
 	@Override
 	public boolean writeUser(User user){
@@ -29,7 +31,7 @@ public class JSONUserStore implements UserStore{
 			e.printStackTrace();
 			return false;
 		}
-		String fname = identifier.getAuthority() + ".txt";
+		String fname = identifier.getAuthority() + ".json";
 		try {
 			File f = new File(fname);
 			f.createNewFile();
@@ -43,7 +45,9 @@ public class JSONUserStore implements UserStore{
 		return true;
 	}// /writeUser
 	
-	// identifier should be some way of uniquely identifying a User
+	// This method takes a recorded user stored in a .json file and 
+	//    parses it into a JSONUser object
+	// identifier should be some way of uniquely identifying a User;
 	// Ideally a URI, or a compression thereof that can be used as a file name
 	@Override
 	public JSONUser readUser(String identifier){
